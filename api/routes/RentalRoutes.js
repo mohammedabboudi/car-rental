@@ -2,7 +2,9 @@
 
 const express = require('express');
 const router = express.Router();
-const { Rental, Car, User } = require('../models');
+const { Rental } = require('../models/RentalModel');
+const { Car } = require('../models/CarModel');
+const { User } = require('../models/UserModel');
 
 // GET /api/rentals
 router.get('/', async (req, res) => {

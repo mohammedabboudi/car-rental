@@ -2,12 +2,11 @@
 
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
-const { sequelize } = require('./models');
-const userRoutes = require('./routes/users');
-const carRoutes = require('./routes/cars');
-const rentalRoutes = require('./routes/rentals');
+const userRoutes = require('./api/routes/UserRoutes');
+const carRoutes = require('./api/routes/CarRoutes');
+const rentalRoutes = require('./api/routes/RentalRoutes');
 
 const app = express();
 
@@ -21,6 +20,6 @@ app.use('/api/rentals', rentalRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-sequelize.sync().then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

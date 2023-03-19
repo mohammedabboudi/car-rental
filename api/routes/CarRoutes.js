@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { Car } = require('../models');
+const { Car } = require('../models/CarModel');
 
 // GET /api/cars
 router.get('/', async (req, res) => {
