@@ -56,6 +56,11 @@ module.exports = (sequelize, DataTypes) => {
     department: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       }
   }, {
     sequelize,
@@ -63,7 +68,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Employee;
 };
-
-
-
 

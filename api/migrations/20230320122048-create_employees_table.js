@@ -34,6 +34,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      isAdmin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       salary: {
         type: Sequelize.INTEGER,
         allowNull: false
