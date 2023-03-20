@@ -10,8 +10,10 @@ const rentalRoutes = require('./api/routes/RentalRoutes');
 
 const app = express();
 
+
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended : false }));
 
 // API routes
 app.use('/api/users', userRoutes);

@@ -2,14 +2,12 @@
 
 const express = require('express');
 const router = express.Router();
-const { Rental } = require('../models/RentalModel');
-const { Car } = require('../models/CarModel');
-const { User } = require('../models/UserModel');
+const db = require('../models');
 
 // GET /api/rentals
 router.get('/', async (req, res) => {
   try {
-    const rentals = await Rental.findAll({
+    const rentals = await db.Rental.findAll({
       include: [
         { model: Car },
         { model: User, as: 'renter' },
@@ -26,7 +24,7 @@ router.get('/', async (req, res) => {
 // GET /api/rentals/:rentalId
 router.get('/:rentalId', async (req, res) => {
   try {
-    const rental = await Rental.findByPk(req.params.rentalId, {
+    const rental = await db.Rental.findByPk(req.params.rentalId, {
       include: [
         { model: Car },
         { model: User, as: 'renter' },
@@ -48,7 +46,7 @@ router.get('/:rentalId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { carId, renterId, startDate, endDate } = req.body;
-    const rental = await Rental.create({
+    const rental = await db.Rental.create({
       carId,
       renterId,
       startDate,
@@ -65,7 +63,7 @@ router.post('/', async (req, res) => {
 router.put('/:rentalId', async (req, res) => {
   try {
     const { carId, renterId, startDate, endDate } = req.body;
-    const rental = await Rental.findByPk(req.params.rentalId);
+    const rental = await db.Rental.findByPk(req.params.rentalId);
     if (rental) {
       rental.carId = carId;
       rental.renterId = renterId;
@@ -85,7 +83,7 @@ router.put('/:rentalId', async (req, res) => {
 // DELETE /api/rentals/:rentalId
 router.delete('/:rentalId', async (req, res) => {
   try {
-    const rental = await Rental.findByPk(req.params.rentalId);
+    const rental = await db.Rental.findByPk(req.params.rentalId);
     if (rental) {
       await rental.destroy();
       res.status(204).send();

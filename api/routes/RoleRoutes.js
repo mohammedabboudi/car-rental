@@ -2,12 +2,12 @@
 
 const express = require('express');
 const router = express.Router();
-const { Role } = require('../models');
+const db = require('../models');
 
 // GET /api/roles
 router.get('/', async (req, res) => {
   try {
-    const roles = await Role.findAll();
+    const roles = await db.Role.findAll();
     res.status(200).json(roles);
   } catch (error) {
     console.error(error);
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // GET /api/roles/:roleId
 router.get('/:roleId', async (req, res) => {
   try {
-    const role = await Role.findByPk(req.params.roleId);
+    const role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       res.status(200).json(role);
     } else {
@@ -34,7 +34,7 @@ router.get('/:roleId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { name } = req.body;
-    const role = await Role.create({
+    const role = await db.Role.create({
       name
     });
     res.status(201).json(role);
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 router.put('/:roleId', async (req, res) => {
   try {
     const { name } = req.body;
-    const role = await Role.findByPk(req.params.roleId);
+    const role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       role.name = name;
       await role.save();
@@ -65,7 +65,7 @@ router.put('/:roleId', async (req, res) => {
 // DELETE /api/roles/:roleId
 router.delete('/:roleId', async (req, res) => {
   try {
-    const role = await Role.findByPk(req.params.roleId);
+    const role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       await role.destroy();
       res.status(204).send();

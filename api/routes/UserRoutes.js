@@ -2,12 +2,12 @@
 
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/UserModel');
+const db = require('../models');
 
 // GET /api/users
 router.get('/', async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await db.User.findAll();
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // GET /api/users/:userId
 router.get('/:userId', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.userId);
+    const user = await db.User.findByPk(req.params.userId);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -33,13 +33,14 @@ router.get('/:userId', async (req, res) => {
 // POST /api/users
 router.post('/', async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
-    const user = await User.create({
-      firstName,
-      lastName,
+    const { first_name, last_name, email, password } = req.body;
+    const user = await db.User.create({
+      first_name,
+      last_name,
       email,
       password
     });
+
     res.status(201).json(user);
   } catch (error) {
     console.error(error);
@@ -50,11 +51,11 @@ router.post('/', async (req, res) => {
 // PUT /api/users/:userId
 router.put('/:userId', async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
-    const user = await User.findByPk(req.params.userId);
+    const { first_name, last_name, email, password } = req.body;
+    const user = await db.User.findByPk(req.params.userId);
     if (user) {
-      user.firstName = firstName;
-      user.lastName = lastName;
+      user.first_name = first_name;
+      user.last_name = last_name;
       user.email = email;
       user.password = password;
       await user.save();
@@ -71,7 +72,7 @@ router.put('/:userId', async (req, res) => {
 // DELETE /api/users/:userId
 router.delete('/:userId', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.userId);
+    const user = await db.User.findByPk(req.params.userId);
     if (user) {
       await user.destroy();
       res.status(204).send();
