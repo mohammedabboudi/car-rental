@@ -1,20 +1,29 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+'use strict';
+const { Model } = require('sequelize');
 
-class Payment extends Model {}
+module.exports = (sequelize, DataTypes) => {
+  class Payment extends Model {
+    static associate(models) {
+      Payment.belongsTo(models.User, { foreignKey: 'user_id' });
+      Payment.belongsTo(models.Car, { foreignKey: 'car_id' });
+    }
+  }
+  Payment.init(
+    {
+        amount: {
+          type: DataTypes.DECIMAL(10, 2),
+          allowNull: false,
+        },
+        paymentMethod: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+      }, {
+        sequelize,
+        modelName: 'Payment',
+      }
+  );
 
-Payment.init({
-  amount: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-  },
-  paymentMethod: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-}, {
-  sequelize,
-  modelName: 'Payment',
-});
 
-module.exports = Payment;
+  return Payment;
+};

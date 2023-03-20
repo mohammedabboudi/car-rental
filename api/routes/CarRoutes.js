@@ -1,13 +1,11 @@
-// routes/cars.js
-
 const express = require('express');
 const router = express.Router();
-const { Car } = require('../models/CarModel');
+const db = require('../models');
 
 // GET /api/cars
 router.get('/', async (req, res) => {
   try {
-    const cars = await Car.findAll();
+    const cars = await db.Car.findAll();
     res.status(200).json(cars);
   } catch (error) {
     console.error(error);
@@ -18,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET /api/cars/:carId
 router.get('/:carId', async (req, res) => {
   try {
-    const car = await Car.findByPk(req.params.carId);
+    const car = await db.Car.findByPk(req.params.carId);
     if (car) {
       res.status(200).json(car);
     } else {
@@ -34,7 +32,7 @@ router.get('/:carId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { make, model, year, color, dailyRate, available } = req.body;
-    const car = await Car.create({
+    const car = await db.Car.create({
       make,
       model,
       year,
@@ -53,7 +51,7 @@ router.post('/', async (req, res) => {
 router.put('/:carId', async (req, res) => {
   try {
     const { make, model, year, color, dailyRate, available } = req.body;
-    const car = await Car.findByPk(req.params.carId);
+    const car = await db.Car.findByPk(req.params.carId);
     if (car) {
       car.make = make;
       car.model = model;
@@ -75,7 +73,7 @@ router.put('/:carId', async (req, res) => {
 // DELETE /api/cars/:carId
 router.delete('/:carId', async (req, res) => {
   try {
-    const car = await Car.findByPk(req.params.carId);
+    const car = await db.Car.findByPk(req.params.carId);
     if (car) {
       await car.destroy();
       res.status(204).send();
