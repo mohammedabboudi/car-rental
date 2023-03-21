@@ -18,11 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
 
 // API routes
-app.use('/api/user', userRoutes);
-app.use('/api/car', carRoutes);
-app.use('/api/rental', rentalRoutes);
-app.use('/api/employee', employeeRoutes);
-app.use('/api/payment', paymentRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/cars', carRoutes);
+app.use('/api/rentals', rentalRoutes);
+app.use('/api/employees', employeeRoutes);
+app.use('/api/payments', paymentRoutes);
+
+
 
 // Start server
 const PORT = process.env.PORT || 5000;

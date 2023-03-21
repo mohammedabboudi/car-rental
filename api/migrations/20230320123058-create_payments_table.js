@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('payments', {
-      id: {
+      payment_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Rentals',
-          key: 'id'
+          key: 'rental_id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DECIMAL(10, 2)
       },
-      paymentMethod: {
+      payment_method: {
         allowNull: false,
         type: Sequelize.ENUM('CREDIT_CARD', 'DEBIT_CARD', 'CASH')
       },

@@ -1,86 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const { getAllUsers, getUser, createUser, updateUser, deleteUser } = require('../controllers/UserController')
 
 // GET /api/users
-router.get('/', async (req, res) => {
-  try {
-    const users = await db.User.findAll();
-    res.status(200).json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.get('/', getAllUsers);
 
 // GET /api/users/:userId
-router.get('/:userId', async (req, res) => {
-  try {
-    const user = await db.User.findByPk(req.params.userId);
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(404).send('User not found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.get('/:userId', getUser);
 
 // POST /api/users
-router.post('/', async (req, res) => {
-  try {
-    const { first_name, last_name, email, password } = req.body;
-    const user = await db.User.create({
-      first_name,
-      last_name,
-      email,
-      password
-    });
-
-    res.status(201).json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.post('/', createUser);
 
 // PUT /api/users/:userId
-router.put('/:userId', async (req, res) => {
-  try {
-    const { first_name, last_name, email, password } = req.body;
-    const user = await db.User.findByPk(req.params.userId);
-    if (user) {
-      user.first_name = first_name;
-      user.last_name = last_name;
-      user.email = email;
-      user.password = password;
-      await user.save();
-      res.status(200).json(user);
-    } else {
-      res.status(404).send('User not found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.put('/:userId', updateUser);
 
 // DELETE /api/users/:userId
-router.delete('/:userId', async (req, res) => {
-  try {
-    const user = await db.User.findByPk(req.params.userId);
-    if (user) {
-      await user.destroy();
-      res.status(204).send();
-    } else {
-      res.status(404).send('User not found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.delete('/:userId', deleteUser);
 
 module.exports = router;
