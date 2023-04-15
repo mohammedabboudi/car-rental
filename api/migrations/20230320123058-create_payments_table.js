@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('payments', {
+    await queryInterface.createTable('Payments', {
       payment_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -21,18 +21,24 @@ module.exports = {
       },
       amount: {
         allowNull: false,
-        type: Sequelize.DECIMAL(10, 2)
+        type: Sequelize.FLOAT
       },
       payment_method: {
+        type: Sequelize.STRING,
         allowNull: false,
         type: Sequelize.ENUM('CREDIT_CARD', 'DEBIT_CARD', 'CASH')
       },
-      created_at: {
+      payment_status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'not approved',
+      },
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
@@ -41,6 +47,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('payments');
+    await queryInterface.dropTable('Payments');
   }
 };

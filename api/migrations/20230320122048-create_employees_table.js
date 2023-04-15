@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('employees', {
+    await queryInterface.createTable('Employees', {
       employee_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,50 +11,69 @@ module.exports = {
       },
       first_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       last_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       phone_number: {
         type: Sequelize.STRING,
         allowNull: true
       },
-      hire_date: {
-        type: Sequelize.DATEONLY,
-        allowNull: false
+      photo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      zip_code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      date_of_birth: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      date_of_hire: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       job_title: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-      is_admin: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
       },
       salary: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
-      created_at: {
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       }
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('employees');
+    await queryInterface.dropTable('Employees');
   }
 };

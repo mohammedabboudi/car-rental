@@ -32,9 +32,9 @@ async function getRole(req, res){
 async function createRole(req, res){
 
     try {
-          const { name } = req.body;
+          const { name, description } = req.body;
           const role = await db.Role.create({
-            name
+            name, description
           });
           res.status(201).json(role);
         } catch (error) {

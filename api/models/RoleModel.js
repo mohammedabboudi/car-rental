@@ -23,10 +23,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      }
     },
     {
       sequelize,
       modelName: 'Role',
+      tableName: 'Roles',
+      timestamps: true,
     }
   );
   return Role;

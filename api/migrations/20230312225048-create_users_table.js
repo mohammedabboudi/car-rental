@@ -26,19 +26,24 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      photo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       role_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 1,
         references: {
           model: 'Roles',
           key: 'role_id',
         },
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },

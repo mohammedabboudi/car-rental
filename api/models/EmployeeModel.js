@@ -9,62 +9,73 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Employee.init({
-    first_name: {
+      employee_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+      },
+      first_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    last_name: {
+      last_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    email: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    phone: {
+      phone_number: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    address: {
+      photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      address: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    city: {
+      city: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    state: {
+      state: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    zip_code: {
+      zip_code: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    date_of_birth: {
+      date_of_birth: {
         type: DataTypes.DATE,
         allowNull: false,
       },
-    date_of_hire: {
+      date_of_hire: {
         type: DataTypes.DATE,
         allowNull: false,
       },
-    job_title: {
+      job_title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    department: {
-        type: DataTypes.STRING,
+      createdAt: {
         allowNull: false,
+        type: DataTypes.DATE,
       },
-    isAdmin: {
-        type: DataTypes.BOOLEAN,
+      updatedAt: {
         allowNull: false,
-        defaultValue: false,
+        type: DataTypes.DATE,
       }
   }, {
     sequelize,
     modelName: 'Employee',
+    tableName: 'Employees',
+    timestamps: true,
   });
   return Employee;
 };

@@ -3,27 +3,37 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
-const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+
 const userRoutes = require('./api/routes/UserRoutes');
 const carRoutes = require('./api/routes/CarRoutes');
 const rentalRoutes = require('./api/routes/RentalRoutes');
 const employeeRoutes = require('./api/routes/EmployeeRoutes');
 const paymentRoutes = require('./api/routes/PaymentRoutes');
+const authRoutes = require('./api/routes/AuthRoutes');
+const roleRoutes = require('./api/routes/roleRoutes');
 
 const app = express();
 
 
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
+app.use(cookieParser());
 
 // API routes
-app.use('/api/users', userRoutes);
-app.use('/api/cars', carRoutes);
-app.use('/api/rentals', rentalRoutes);
-app.use('/api/employees', employeeRoutes);
-app.use('/api/payments', paymentRoutes);
+app.use('/users', userRoutes);
+app.use('/cars', carRoutes);
+app.use('/rentals', rentalRoutes);
+app.use('/employees', employeeRoutes);
+app.use('/payments', paymentRoutes);
+app.use('/auth', authRoutes);
+app.use('/roles', roleRoutes);
 
+app.get('/test', (req, res) => {
+    res.json('hhhhhhhhh');
+})
 
 
 // Start server

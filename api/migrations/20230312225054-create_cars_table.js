@@ -9,11 +9,15 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      make: {
+      brand: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       model: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      image: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -30,11 +34,11 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
       },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },

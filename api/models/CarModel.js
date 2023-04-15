@@ -15,11 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      make: {
+      brand: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       model: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -36,10 +40,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: true,
       },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      }
     },
     {
       sequelize,
       modelName: 'Car',
+      tableName: 'Cars',
+      timestamps: true,
     }
   );
   return Car;

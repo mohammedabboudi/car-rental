@@ -2,19 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Rentals', {
-      rental_id: {
-        type: Sequelize.INTEGER,
+    await queryInterface.createTable('RefreshTokens', {
+      token_id: {
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      rental_start_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      rental_end_date: {
-        type: Sequelize.DATE,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
       },
       user_id: {
@@ -24,14 +16,17 @@ module.exports = {
           model: 'Users',
           key: 'user_id',
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
-      car_id: {
-        type: Sequelize.INTEGER,
+      token: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: 'Cars',
-          key: 'car_id',
-        },
+        unique: true,
+      },
+      expires_in: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +40,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Rentals');
+    await queryInterface.dropTable('RefreshTokens');
   },
 };

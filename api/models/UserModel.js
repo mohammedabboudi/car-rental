@@ -33,11 +33,35 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      role_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+        references: {
+          model: 'Roles',
+          key: 'role_id',
+        },
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      }
     },
     {
       sequelize,
       modelName: 'User',
+      tableName: 'Users',
+      timestamps: true,
     }
   );
+  
   return User;
 };
