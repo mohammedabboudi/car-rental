@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      rental_price: {
+      price: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },

@@ -1,21 +1,21 @@
 const express = require('express');
 const { getAllRentals, getRental, createRental, updateRental, deleteRental } = require('../controllers/RentalController');
-const { authorization } = require('../middlewares/AuthorizeUser');
+const { authorizeAcceess } = require('../middlewares/AuthorizeUser');
 const router = express.Router();
 
 // GET /api/rentals
-router.get('/', authorization, getAllRentals);
+router.get('/', authorizeAcceess, getAllRentals);
 
 // GET /api/rentals/:rentalId
-router.get('/:rentalId', authorization, getRental);
+router.get('/:rentalId', authorizeAcceess, getRental);
 
 // POST /api/rentals
-router.post('/', authorization, createRental);
+router.post('/', authorizeAcceess, createRental);
 
 // PUT /api/rentals/:rentalId
-router.put('/:rentalId', authorization, updateRental);
+router.put('/:rentalId', authorizeAcceess, updateRental);
 
 // DELETE /api/rentals/:rentalId
-router.delete('/:rentalId', authorization, deleteRental);
+router.delete('/:rentalId', authorizeAcceess, deleteRental);
 
 module.exports = router;

@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      rental_price: {
+      price: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },

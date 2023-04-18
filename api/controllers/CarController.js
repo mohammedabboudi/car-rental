@@ -32,19 +32,20 @@ async function getCar(req, res){
 
 async function createCar(req, res){
     try {
-      const { make, model, year, color, dailyRate, available } = req.body;
+      const available = 1;
+      const { brand, model, image, year, price } = req.body;
       const car = await db.Car.create({
-        make,
+        brand,
         model,
+        image,
         year,
-        color,
-        dailyRate,
+        price,
         available
       });
       res.status(201).json(car);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Server Error');
+      res.status(500).json({ message:'Server Error' });
     }
   }
   

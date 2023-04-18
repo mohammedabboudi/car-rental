@@ -5,12 +5,12 @@ function login(req, res, next){
 
     const { email, password } = req.body;
 
-    db.User.findOne({ where: { email: email, password: password } }).then(user =>{
+    db.User.findOne({ where: { email: email, password: password }, include: [db.Role], }).then(user =>{
 
         if (user != null) {
             const user_id = user.user_id;
-            const role_id = user.role_id;
-            const userCredentials = { user_id, role_id };
+            const role = user.Role.name;
+            const userCredentials = { user_id, role };
 
             req.user = userCredentials;
             next();
@@ -38,16 +38,10 @@ async function signup(req, res){
         const user = await db.User.findOne({ where: { email: email } });
 
         if (user == null) {
-
-            console.log(first_name);
-            console.log(last_name);
-            console.log(email);
-            console.log(password);
             const response = db.User.create({ first_name, last_name, email, password });
-            console.log(response);
 
             if (response) {
-                res.status(200).json({ message: 'You created your account successfully' });
+                res.status(200).json({ message: 'You created your account successfully 😊 👌' });
             }
            
         } else {
@@ -57,7 +51,6 @@ async function signup(req, res){
     } catch (error) {
         res.status(500).json({ massage: error });
     }
-
 
 }
 
